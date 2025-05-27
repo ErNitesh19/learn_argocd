@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-web
+  labels:
+    app: helm
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: helm
+  template:
+    metadata:
+      labels:
+        app: helm
+    spec:
+      containers:
+        - name: apache-web
+          image: {{ .Values.image.name }}
+          ports:
+            - containerPort: 8080
